@@ -1,2 +1,2 @@
 # RubyLexer
-uby Lexer in Python
+Ruby Lexer in Python
