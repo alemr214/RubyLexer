@@ -6,6 +6,9 @@ from lexer import lexer_action
 background = "#303446"
 foreground = "#d5cee3"
 font = "#232634"
+font_green = "green"
+font_orange = "#ffaa2c"
+font_red = "#ff5555"
 
 
 def on_content_changed(event=None):
@@ -176,7 +179,7 @@ lex_button = tk.Button(
     command=lex_text,
     width=10,
     height=2,
-    fg="green",
+    fg=f"{font_green}",
     bd=0,
     font=("Helvetica", 12, "bold"),
 )
@@ -199,7 +202,7 @@ clear_button = tk.Button(
     command=clear_content,
     width=10,
     height=2,
-    fg="#ffaa2c",
+    fg=f"{font_orange}",
     bd=0,
     font=("Helvetica", 12, "bold"),
 )
@@ -211,7 +214,7 @@ exit_button = tk.Button(
     command=exit_app,
     width=10,
     height=2,
-    fg="#ff5555",
+    fg=f"{font_red}",
     bd=0,
     font=("Helvetica", 12, "bold"),
 )

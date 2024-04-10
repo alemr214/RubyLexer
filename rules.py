@@ -1,3 +1,4 @@
+from tkinter import W
 from reserved import reserved_words
 
 # --------------------------------------------
@@ -19,12 +20,18 @@ tokens = (
     "R_BRACKET",
     "L_BRACE",
     "R_BRACE",
+    # Operators
+    "ARITHMETIC_OPERATOR",
+    "COMPARISON_OPERATOR",
+    "LOGICAL_OPERATOR",
+    "ASSIGNMENT_OPERATOR",
+    "BITWISE_OPERATOR",
+    "RANGE_OPERATOR",
     # Separators
     "COMMA",
     "COLON",
-    "SEMICOLON",
+    "DOT",
     # Identifiers
-    "OPERATOR",
     "RESERVED",
     "IDENTIFIER",
 )
@@ -41,7 +48,7 @@ t_L_BRACE = r"\{"
 t_R_BRACE = r"\}"
 t_COMMA = r"\,"
 t_COLON = r"\:"
-t_SEMICOLON = r"\;"
+t_DOT = r"\."
 # --------------------------------------------
 #
 #    Regex functions
@@ -79,9 +86,39 @@ def t_FLOAT(t):
     return t
 
 
-def t_OPERATOR(t):
-    r"(\+|\-|\*|\/|\%|\^|\&|\||\~|\!|\=|\<|\>|\?|\@|\\|\.)"
-    t.type = "OPERATOR"
+def t_ARTIHMETIC_OPERATOR(t):
+    r"(\+|\-|\*|\/|\%|\*\*)"
+    t.type = "ARITHMETIC_OPERATOR"
+    return t
+
+
+def t_COMPARISON_OPERATOR(t):
+    r"(\=\=|\!\=|\<|\>|\<\=|\>\=|\<\=\>|\=\=\=)"
+    t.type = "COMPARISON_OPERATOR"
+    return t
+
+
+def t_LOGICAL_OPERATOR(t):
+    r"(\&\&|\|\||\!)"
+    t.type = "LOGICAL_OPERATOR"
+    return t
+
+
+def t_ASSIGNMENT_OPERATOR(t):
+    r"(\=|\+=|\-=|\*=|\/=|\%=|\**=)"
+    t.type = "ASSIGNMENT_OPERATOR"
+    return t
+
+
+def t_BITWISE_OPERATOR(t):
+    r"(\&|\||\~|\^|\<<|\>>)"
+    t.type = "BITWISE_OPERATOR"
+    return t
+
+
+def t_RANGE_OPERATOR(t):
+    r"(\.\.|\.\.\.)"
+    t.type = "RANGE_OPERATOR"
     return t
 
 
