@@ -69,7 +69,7 @@ def t_STRING(t):
 
 
 def t_INTEGER(t):
-    r"(\d+)"
+    r"\d+(?![\.\d])"
     t.type = "INTEGER"
     return t
 
@@ -102,12 +102,18 @@ def t_DOCUMENTATION(t):
 
 
 def t_error(t):
-    print("Illegal character '%s'" % t.value[0])
+    print("Caracter invalido '%s'" % t.value[0] + ", in line: " + str(t.lexer.lineno))
     t.lexer.skip(1)
+    raise Exception(
+        "Error lexicografico.\n Por favor remueva el caracter invalido e intentelo de nuevo.\n Caracter invalido '%s'"
+        % t.value[0]
+        + ", en la linea: "
+        + str(t.lexer.lineno)
+    )
 
 
 def t_RESERVED(t):
-    r"[a-zA-Z_]+\w*"
+    r"[a-zA-Z_][a-zA-Z0-9_]*"
     if t.value in reserved_words:
         t.type = "RESERVED"
     else:
