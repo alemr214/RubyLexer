@@ -42,7 +42,6 @@ t_R_BRACE = r"\}"
 t_COMMA = r"\,"
 t_COLON = r"\:"
 t_SEMICOLON = r"\;"
-t_ignore = " \t"
 # --------------------------------------------
 #
 #    Regex functions
@@ -95,14 +94,17 @@ def t_RESERVED(t):
     return t
 
 
-def t_NEW_LINE(t):
+def t_COMMENT(t):
+    r"\#.*"
+    pass
+
+
+def t_newline(t):
     r"\n+"
     t.lexer.lineno += len(t.value)
 
 
-def t_COMMENT(t):
-    r"\#.*"
-    pass
+t_ignore = " \t"
 
 
 def t_error(t):
