@@ -63,7 +63,7 @@ def t_RATIONAL(t):
 
 
 def t_STRING(t):
-    r"\"[^\"]*\"|\'[^\']*\'"
+    r"(\"[^\"]*\")|(\'[^\']*\')"
     t.type = "STRING"
     return t
 
@@ -81,8 +81,17 @@ def t_FLOAT(t):
 
 
 def t_OPERATOR(t):
-    r"(\+|\-|\*|\/|\%|\^|\&|\||\~|\!|\=|\<|\>|\?|\$|\@|\\|\.)"
+    r"(\+|\-|\*|\/|\%|\^|\&|\||\~|\!|\=|\<|\>|\?|\@|\\|\.)"
     t.type = "OPERATOR"
+    return t
+
+
+def t_RESERVED(t):
+    r"[a-zA-Z_]\w*"
+    if t.value in reserved_words:
+        t.type = "RESERVED"
+    else:
+        t.type = "IDENTIFIER"
     return t
 
 
@@ -96,11 +105,6 @@ def t_COMMENT(t):
     pass
 
 
-def t_DOCUMENTATION(t):
-    r"=begin.*=end"
-    pass
-
-
 def t_error(t):
     print("Caracter invalido '%s'" % t.value[0] + ", in line: " + str(t.lexer.lineno))
     t.lexer.skip(1)
@@ -110,12 +114,3 @@ def t_error(t):
         + ", en la linea: "
         + str(t.lexer.lineno)
     )
-
-
-def t_RESERVED(t):
-    r"[a-zA-Z_][a-zA-Z0-9_]*"
-    if t.value in reserved_words:
-        t.type = "RESERVED"
-    else:
-        t.type = "IDENTIFIER"
-    return t
