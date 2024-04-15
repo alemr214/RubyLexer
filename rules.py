@@ -1,4 +1,3 @@
-from tkinter import W
 from reserved import reserved_words
 
 # --------------------------------------------
